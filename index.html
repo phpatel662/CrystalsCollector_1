@@ -1,14 +1,95 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset= "UTF-8">
-        <title>Get it in the Bag Game!!!</title>
-    </head>
-    <body>
-        <h1> The Designer Purse Game!!!</h1>
-        <p><img src="assets/images/louis_vuitton.jpg" width= 150px></p>
-        <p><img src="assets/images/GG.jpg" width= 150px> </p>
-        <p><img src="assets/images/Pink_Birkin_bag.jpg" width= 150px></p>
-        <p><img src="assets/images/coach.jpg" width= 150px></p>
-    </body>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Get it in the Bag Game!!!</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <h1> The Designer Purse Game!!!</h1>
+    <p><img src="assets/images/louis_vuitton.jpg" id="type1" width=150px></p>
+    <p><img src="assets/images/GG.jpg" id="type2" width=150px></p>
+    <p><img src="assets/images/Pink_Birkin_bag.jpg" id="type3" width=150px></p>
+    <p><img src="assets/images/coach.jpg" id="type4" width=150px></p>
+    <h2>This is the Computers guess:</h2>
+    <p id="comp_guess"></p>
+    <h2>This is your Number so far!!!!</h2>
+    <p id="your_guess"></p>
+    <p id="wins">Wins:</p>
+    <p id="new_wins"></p>
+    <p id="losses">Losses:</p>
+    <p id="new_losses"></p>
+
+    <script>
+
+        var random = "";
+        var number = 19 + Math.floor(Math.random() * 120);
+        var number_picture_1 = 1 + Math.floor(Math.random() * 12);
+        var number_picture_2 = 1 + Math.floor(Math.random() * 12);
+        var number_picture_3 = 1 + Math.floor(Math.random() * 12);
+        var number_picture_4 = 1 + Math.floor(Math.random() * 12);
+        var user_score = 0;
+        var wins = 0;
+        var losses = 0;
+
+
+        random_number = number + random;
+
+        function updateDOM() {
+            $("#your_guess").empty();
+            $("#your_guess").prepend(user_score);
+        }
+
+        function checkGAME() {
+        // 1. if user_score is equal to random_number, then display win
+        // 2. if user_score is less than random_number, continue
+        // 3. if user_score is greater than random_number, then display loss
+        if (random_number === user_score) {
+            alert("You win!");
+            wins++
+            console.log(wins)
+            $("#new_wins").html(wins);
+        }
+
+        else if (user_score > random_number) {
+            alert ("You lose");
+            losses++
+            console.log(losses);
+            $("#new_losses").html(losses);
+            
+        }
+        }
+
+        $("#comp_guess").prepend(random_number);
+        $("#type1").on("click", function () {
+            console.log(user_score += number_picture_1);
+            updateDOM();
+            checkGAME();
+
+        })
+        $("#type2").on("click", function () {
+            console.log(user_score += number_picture_2);
+            updateDOM();
+            checkGAME();
+        })
+        $("#type3").on("click", function () {
+            console.log(user_score += number_picture_3);
+            updateDOM();
+            checkGAME();
+        })
+        $("#type4").on("click", function () {
+            console.log(user_score += number_picture_4);
+            updateDOM();
+            checkGAME();
+        })
+
+        
+       
+
+    </script>
+</body>
+
 </html>
