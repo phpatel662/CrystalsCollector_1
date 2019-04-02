@@ -25,8 +25,8 @@
 
     <script>
 
-        var random = "";
-        var number = 19 + Math.floor(Math.random() * 120);
+        
+        var random_number = 19 + Math.floor(Math.random() * 120);
         var number_picture_1 = 1 + Math.floor(Math.random() * 12);
         var number_picture_2 = 1 + Math.floor(Math.random() * 12);
         var number_picture_3 = 1 + Math.floor(Math.random() * 12);
@@ -36,7 +36,7 @@
         var losses = 0;
 
 
-        random_number = number + random;
+       
 
         function updateDOM() {
             $("#your_guess").empty();
@@ -52,6 +52,7 @@
             wins++
             console.log(wins)
             $("#new_wins").html(wins);
+            endGame();
         }
 
         else if (user_score > random_number) {
@@ -59,35 +60,49 @@
             losses++
             console.log(losses);
             $("#new_losses").html(losses);
-            
+            endGame();
         }
         }
 
-        $("#comp_guess").prepend(random_number);
+        $("#comp_guess").prepend(randomNumberGen);
         $("#type1").on("click", function () {
-            console.log(user_score += number_picture_1);
+            user_score += number_picture_1
+            console.log("user_score" + user_score)
             updateDOM();
             checkGAME();
 
         })
         $("#type2").on("click", function () {
-            console.log(user_score += number_picture_2);
+           user_score += number_picture_2;
+           console.log("user_score" + user_score)
             updateDOM();
             checkGAME();
         })
         $("#type3").on("click", function () {
-            console.log(user_score += number_picture_3);
+            user_score += number_picture_3;
+            console.log("user_score" + user_score)
             updateDOM();
             checkGAME();
         })
         $("#type4").on("click", function () {
-            console.log(user_score += number_picture_4);
+            user_score += number_picture_4;
+            console.log("user_score" + user_score)
             updateDOM();
             checkGAME();
+            
         })
 
-        
+        function endGame() {
+            $("#your_guess").empty();
+            $("#comp_guess").empty();
+            $("#comp_guess").prepend(randomNumberGen);
+            user_score = 0;
+
+        }
        
+       function randomNumberGen() {
+        return 19 + Math.floor(Math.random() * 120);
+       }
 
     </script>
 </body>
