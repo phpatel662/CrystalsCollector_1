@@ -23,86 +23,117 @@
     <p id="losses">Losses:</p>
     <p id="new_losses"></p>
 
+
     <script>
+        $(document).ready(function () {
 
-        
-        var random_number = 19 + Math.floor(Math.random() * 120);
-        var number_picture_1 = 1 + Math.floor(Math.random() * 12);
-        var number_picture_2 = 1 + Math.floor(Math.random() * 12);
-        var number_picture_3 = 1 + Math.floor(Math.random() * 12);
-        var number_picture_4 = 1 + Math.floor(Math.random() * 12);
-        var user_score = 0;
-        var wins = 0;
-        var losses = 0;
+            var wins = 0;
+            var lost = 0;
+            var score = 0;
+
+            // Create a computer generator number for match
+            var computerGuess = parseInt(Math.floor(Math.random() * 120) + 19);
+            $("#comp_guess").html(computerGuess);
+
+            //converting the string in integer
+            var stone1 = parseInt(Math.floor(Math.random() * 12) + 1);
+            var stone2 = parseInt(Math.floor(Math.random() * 12) + 1);
+            var stone3 = parseInt(Math.floor(Math.random() * 12) + 1);
+            var stone4 = parseInt(Math.floor(Math.random() * 12) + 1);
+
+            //creating reset function the game
+
+            function reset() {
+
+                score = 0;
+                $("#comp_guess").html(score);
+                computerGuess = parseInt(Math.floor(Math.random() * 120) + 19);
+                $("#comp_guess").html(computerGuess);
 
 
-       
+                stone1 = parseInt(Math.floor(Math.random() * 12) + 1);
+                stone2 = parseInt(Math.floor(Math.random() * 12) + 1);
+                stone3 = parseInt(Math.floor(Math.random() * 12) + 1);
+                stone4 = parseInt(Math.floor(Math.random() * 12) + 1);
 
-        function updateDOM() {
-            $("#your_guess").empty();
-            $("#your_guess").prepend(user_score);
-        }
 
-        function checkGAME() {
-        // 1. if user_score is equal to random_number, then display win
-        // 2. if user_score is less than random_number, continue
-        // 3. if user_score is greater than random_number, then display loss
-        if (random_number === user_score) {
-            alert("You win!");
-            wins++
-            console.log(wins)
-            $("#new_wins").html(wins);
-            endGame();
-        }
+            }
 
-        else if (user_score > random_number) {
-            alert ("You lose");
-            losses++
-            console.log(losses);
-            $("#new_losses").html(losses);
-            endGame();
-        }
-        }
+            //create a click function for images generate number
 
-        $("#comp_guess").prepend(randomNumberGen);
-        $("#type1").on("click", function () {
-            user_score += number_picture_1
-            console.log("user_score" + user_score)
-            updateDOM();
-            checkGAME();
 
-        })
-        $("#type2").on("click", function () {
-           user_score += number_picture_2;
-           console.log("user_score" + user_score)
-            updateDOM();
-            checkGAME();
-        })
-        $("#type3").on("click", function () {
-            user_score += number_picture_3;
-            console.log("user_score" + user_score)
-            updateDOM();
-            checkGAME();
-        })
-        $("#type4").on("click", function () {
-            user_score += number_picture_4;
-            console.log("user_score" + user_score)
-            updateDOM();
-            checkGAME();
-            
-        })
+            $("#type1").on("click", function () {
 
-        function endGame() {
-            $("#your_guess").empty();
-            $("#comp_guess").empty();
-            $("#comp_guess").prepend(randomNumberGen);
-            user_score = 0;
+                score = score + stone1;
+                $("#type1").html(score);
+                $("#your_guess").html(score);
+                if (score == computerGuess) {
+                    checkifwon();
+                } else if (score > computerGuess) {
+                    checkifwon();
+                }
+            });
 
-        }
-       
-       function randomNumberGen() {
-        return 19 + Math.floor(Math.random() * 120);
-       }
+
+            $("#type2").on("click", function () {
+
+                score = score + stone2;
+                $("#type2").html(score);
+                $("#your_guess").html(score);
+                if (score == computerGuess) {
+                    checkifwon();
+                } else if (score > computerGuess) {
+                    checkifwon();
+                }
+            });
+
+            $("#type3").on("click", function () {
+
+                score = score + stone3;
+                $("#type3").html(score);
+                $("#your_guess").html(score);
+                if (score == computerGuess) {
+                    checkifwon();
+                } else if (score > computerGuess) {
+                    checkifwon();
+                }
+            });
+
+            $("#type4").on("click", function () {
+
+                score = score + stone4;
+                $("#type4").html(score);
+                $("#your_guess").html(score);
+                if (score == computerGuess) {
+                    checkifwon();
+                } else if (score > computerGuess) {
+                    checkifwon();
+                }
+            });
+
+            // create win and lost
+            function checkifwon() {
+
+                if (score === computerGuess) {
+
+                    wins++;
+                    console.log(wins);
+                    $("#new_wins").html("You Win");
+                    $("#new_wins").html(wins);
+                    reset();
+                } else if (score > computerGuess) {
+
+                    lost++;
+                    console.log(lost);
+                    $("#new_losses").html("You Lost");
+                    $("#new_losses").html(lost);
+                    reset();
+                }
+
+            }
+
+        });
+
 
     </script>
 </body>
